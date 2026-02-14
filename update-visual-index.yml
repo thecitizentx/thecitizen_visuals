@@ -1,0 +1,89 @@
+name: Update Visual Index
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - '!.github/**'
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate visual index
+        run: |
+          TABLE="| File | Title | Description |\n|------|-------|-------------|\n"
+
+          for file in *.html; do
+            [ "$file" = "*.html" ] && continue
+
+            # Extract title from <title> tag
+            TITLE=$(grep -oP '(?<=<title>).*?(?=</title>)' "$file" | head -1)
+            # Fall back to filename if no title
+            [ -z "$TITLE" ] && TITLE="$file"
+            # Strip " — The Citizen" or " | The Citizen" suffix
+            TITLE=$(echo "$TITLE" | sed 's/ [—|] The Citizen//')
+
+            # Extract description from meta tag
+            DESC=$(grep -oP '(?<=<meta name="description" content=").*?(?=")' "$file" | head -1)
+            [ -z "$DESC" ] && DESC="—"
+
+            # Extract article URL from data-article-url or back-link href
+            URL=$(grep -oP '(?<=data-article-url=").*?(?=")' "$file" | head -1)
+            if [ -z "$URL" ]; then
+              URL=$(grep -oP '(?<=class="back-link" href=").*?(?=")' "$file" | head -1)
+            fi
+
+            # Build file link (GitHub Pages)
+            if [ "$file" = "index.html" ]; then
+              FILE_DISPLAY="\`index.html\`"
+            else
+              FILE_DISPLAY="[\`$file\`](./$file)"
+            fi
+
+            # Build title with article link if available
+            if [ -n "$URL" ] && [ "$URL" != "https://thecitizen.substack.com" ]; then
+              TITLE_DISPLAY="[$TITLE]($URL)"
+            else
+              TITLE_DISPLAY="$TITLE"
+            fi
+
+            TABLE+="| $FILE_DISPLAY | $TITLE_DISPLAY | $DESC |\n"
+          done
+
+          # Replace content between markers in README
+          python3 << PYEOF
+          import re
+
+          with open('README.md', 'r') as f:
+              content = f.read()
+
+          table = """$TABLE"""
+
+          pattern = r'(<!-- VISUAL-INDEX-START -->).*?(<!-- VISUAL-INDEX-END -->)'
+          replacement = r'\1\n' + table.strip() + r'\n\2'
+
+          new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+
+          with open('README.md', 'w') as f:
+              f.write(new_content)
+
+          if new_content != content:
+              print('README updated')
+          else:
+              print('No changes needed')
+          PYEOF
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --cached --quiet || git commit -m "Auto-update visual index"
+          git push
