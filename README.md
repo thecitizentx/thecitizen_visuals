@@ -1,6 +1,6 @@
 # The Citizen — Interactive Article Visuals
 
-Interactive data visualizations and civic tools accompanying investigative reporting from [**The Citizen**](https://thecitizen.substack.com), an independent accountability journalism publication based in Willow Park, Texas.
+Interactive data visualizations and civic tools accompanying investigative reporting from [**The Citizen**](https://thecitizentexas.substack.com), an independent accountability journalism publication based in Willow Park, Texas.
 
 ## About The Citizen
 
@@ -19,18 +19,18 @@ This repo hosts standalone, interactive HTML visuals that accompany our Substack
 <!-- VISUAL-INDEX-START -->
 | File | Title | Description |
 |------|-------|-------------|
-| [`zoning-compounding-visuals.html`](./zoning-compounding-visuals.html) | How Zoning Decisions Compound Over Time | Interactive visuals showing how incremental rezoning decisions transform communities over time. Land use diagrams and tax base impact data. |
+| `index.html` | How Zoning Decisions Compound Over Time | Before/after land use diagram and tax base impact table showing how 23 incremental rezoning votes transform 160 acres over 15 years |
 <!-- VISUAL-INDEX-END -->
 
 ## How to Use
 
-**View online:** Visit the live site at `https://[username].github.io/citizen-visuals/`
+**View online:** Visit the live site at `https://spen-hodge.github.io/thecitizen_visuals/`
 
 **View locally:** Download `index.html` and open it in any modern browser. Everything is self-contained — fonts load from Google Fonts, and all data, styles, and interactivity are built into the single file.
 
 **Embed on a website:** Use an iframe pointing to the GitHub Pages URL:
 ```html
-<iframe src="https://[username].github.io/citizen-visuals/" width="100%" height="800" frameborder="0"></iframe>
+<iframe src="https://spen-hodge.github.io/thecitizen_visuals/" width="100%" height="800" frameborder="0"></iframe>
 ```
 
 **Share a visual:** Link directly to the GitHub Pages URL from social media, newsletters, or other publications. Attribution to The Citizen is required under the license.
@@ -39,7 +39,7 @@ This repo hosts standalone, interactive HTML visuals that accompany our Substack
 
 These visuals are designed to be shared. If you're a civic organization, neighborhood association, school, or journalist covering similar issues in your own community, you're welcome to use and adapt these materials under the terms of the license below. We just ask that you credit The Citizen and don't use them commercially.
 
-If you'd like to collaborate or have questions about the data behind any visual, reach out via [The Citizen on Substack](https://thecitizen.substack.com).
+If you'd like to collaborate or have questions about the data behind any visual, reach out via [The Citizen on Substack](https://thecitizentexas.substack.com).
 
 ## Data Sources
 
@@ -74,4 +74,4 @@ See [LICENSE](./LICENSE) for full terms.
 
 ---
 
-*The Citizen is an independent, reader-supported publication. If you find these tools useful, consider [subscribing](https://thecitizen.substack.com).*
+*The Citizen is an independent, reader-supported publication. If you find these tools useful, consider [subscribing](https://thecitizentexas.substack.com).*
