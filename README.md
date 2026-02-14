@@ -19,7 +19,7 @@ This repo hosts standalone, interactive HTML visuals that accompany our Substack
 <!-- VISUAL-INDEX-START -->
 | File | Title | Description |
 |------|-------|-------------|
-| `index.html` | How Zoning Decisions Compound Over Time | Before/after land use diagram and tax base impact table showing how 23 incremental rezoning votes transform 160 acres over 15 years |
+| [`zoning-compounding-visuals.html`](./zoning-compounding-visuals.html) | How Zoning Decisions Compound Over Time | Interactive visuals showing how incremental rezoning decisions transform communities over time. Land use diagrams and tax base impact data. |
 <!-- VISUAL-INDEX-END -->
 
 ## How to Use
