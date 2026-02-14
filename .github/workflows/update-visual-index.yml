@@ -48,7 +48,7 @@ jobs:
             fi
 
             # Build title with article link if available
-            if [ -n "$URL" ] && [ "$URL" != "https://thecitizen.substack.com" ]; then
+            if [ -n "$URL" ] && [ "$URL" != "https://thecitizentexas.substack.com" ]; then
               TITLE_DISPLAY="[$TITLE]($URL)"
             else
               TITLE_DISPLAY="$TITLE"
