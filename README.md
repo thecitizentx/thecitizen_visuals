@@ -19,6 +19,7 @@ This repo hosts standalone, interactive HTML visuals that accompany our Substack
 <!-- VISUAL-INDEX-START -->
 | File | Title | Description |
 |------|-------|-------------|
+| [`tax-base-interactive.html`](./tax-base-interactive.html) | Tax Base Impact Over Time Interactive | How shifting land use percentages compound into dramatically different fiscal outcomes over 15 years of incremental rezoning. |
 | [`zoning-compounding-visuals.html`](./zoning-compounding-visuals.html) | How Zoning Decisions Compound Over Time | Interactive visuals showing how incremental rezoning decisions transform communities over time. Land use diagrams and tax base impact data. |
 <!-- VISUAL-INDEX-END -->
 
