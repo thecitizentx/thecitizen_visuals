@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maintenance Backlog — Data Review | The Citizen</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --poppy: #D93833;
+    --poppy-light: #E8605C;
+    --poppy-dark: #B52D29;
+    --indigo: #33425C;
+    --indigo-light: #4A5D7A;
+    --indigo-dark: #232E40;
+    --jet: #373435;
+    --white: #FEFEFE;
+    --gray: #C3BFC2;
+    --gray-light: #F0EEF0;
+    --gray-mid: #E5E2E4;
+    --dun: #D9C7AA;
+    --forest: #548C2F;
+    --pakistan: #124912;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--gray-light);
+    color: var(--jet);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Cover Page ── */
+  .cover {
+    min-height: 100vh;
+    background: var(--indigo-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 800px;
+    height: 800px;
+    border: 2px solid rgba(217,56,51,0.15);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 600px;
+    height: 600px;
+    border: 2px solid rgba(217,56,51,0.25);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .cover .signal-ring {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    width: 500px;
+    height: 500px;
+    opacity: 0.08;
+  }
+  .cover .signal-ring svg { width: 100%; height: 100%; }
+
+  .cover-label {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--poppy);
+    margin-bottom: 24px;
+  }
+
+  .cover h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    color: var(--white);
+    line-height: 1.1;
+    max-width: 700px;
+    margin-bottom: 20px;
+  }
+
+  .cover h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: clamp(16px, 2vw, 22px);
+    color: var(--gray);
+    max-width: 600px;
+    line-height: 1.5;
+    margin-bottom: 48px;
+  }
+
+  .cover-meta {
+    font-size: 13px;
+    color: rgba(195,191,194,0.6);
+    letter-spacing: 0.5px;
+  }
+  .cover-meta span { color: var(--poppy); }
+
+  .cover-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--poppy) 0%, var(--poppy) 40%, var(--indigo-light) 100%);
+  }
+
+  /* ── Shared Page Layout ── */
+  .page {
+    min-height: 100vh;
+    padding: 60px 80px;
+    background: var(--white);
+    position: relative;
+    border-bottom: 1px solid var(--gray-mid);
+    page-break-after: always;
+  }
+
+  .page-number {
+    position: absolute;
+    top: 30px;
+    right: 80px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  .section-label {
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--poppy);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gray-mid);
+  }
+
+  .page h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 3.5vw, 42px);
+    color: var(--indigo-dark);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .page-subtitle {
+    font-size: 15px;
+    color: var(--indigo-light);
+    max-width: 700px;
+    margin-bottom: 48px;
+    line-height: 1.6;
+  }
+
+  .source-note {
+    font-size: 11px;
+    color: var(--gray);
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-mid);
+    line-height: 1.5;
+  }
+  .source-note strong { color: var(--indigo-light); font-weight: 600; }
+
+  /* ── VISUAL 1: Timeline ── */
+  .timeline-container {
+    position: relative;
+    padding: 20px 0 20px 0;
+  }
+
+  .timeline-track {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .timeline-year-group {
+    position: relative;
+    padding-left: 140px;
+    margin-bottom: 8px;
+  }
+
+  .timeline-year-label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--indigo-dark);
+    text-align: right;
+    padding-right: 24px;
+    line-height: 1;
+  }
+
+  .timeline-year-line {
+    position: absolute;
+    left: 116px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--gray-mid);
+  }
+
+  .timeline-events {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 4px 0 20px 24px;
+  }
+
+  .timeline-event {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 18px;
+    border-radius: 6px;
+    background: var(--gray-light);
+    transition: background 0.2s;
+    position: relative;
+  }
+  .timeline-event:hover { background: #E8E5E8; }
+
+  .timeline-event::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 18px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--gray);
+    border: 2px solid var(--white);
+    z-index: 1;
+  }
+
+  .timeline-event.highlight::before { background: var(--poppy); }
+  .timeline-event.highlight { background: rgba(217,56,51,0.04); border-left: 3px solid var(--poppy); }
+
+  .timeline-event.caution::before { background: var(--dun); }
+  .timeline-event.caution { border-left: 3px solid var(--dun); }
+
+  .event-date {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--indigo-light);
+    min-width: 60px;
+    flex-shrink: 0;
+    padding-top: 2px;
+    letter-spacing: 0.3px;
+  }
+
+  .event-content {
+    flex: 1;
+  }
+
+  .event-title {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--indigo-dark);
+    line-height: 1.4;
+  }
+
+  .event-detail {
+    font-size: 12px;
+    color: var(--indigo-light);
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  .event-figure {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: var(--poppy);
+    white-space: nowrap;
+    padding-top: 1px;
+  }
+
+  /* ── VISUAL 2: Cost Curve ── */
+  .cost-curve-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 40px;
+  }
+
+  .curve-chart {
+    background: var(--indigo-dark);
+    border-radius: 12px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    min-height: 420px;
+  }
+
+  .curve-chart::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    border: 1.5px solid rgba(217,56,51,0.12);
+    border-radius: 50%;
+  }
+
+  .curve-chart h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+
+  .curve-svg-container {
+    width: 100%;
+    height: 280px;
+  }
+
+  .curve-svg-container svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .multiplier-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .multiplier-card {
+    background: var(--gray-light);
+    border-radius: 10px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .multiplier-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--poppy);
+  }
+
+  .multiplier-card.alt::before { background: var(--indigo); }
+
+  .multiplier-icon {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--poppy);
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  .multiplier-card.alt .multiplier-icon { color: var(--indigo); }
+
+  .multiplier-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--indigo-dark);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .multiplier-desc {
+    font-size: 13px;
+    color: var(--indigo-light);
+    line-height: 1.5;
+  }
+
+  .lifecycle-callout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 8px;
+  }
+
+  .lifecycle-box {
+    background: var(--white);
+    border: 1px solid var(--gray-mid);
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .lifecycle-pct {
+    font-family: 'DM Serif Display', serif;
+    font-size: 42px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .lifecycle-pct.good { color: var(--forest); }
+  .lifecycle-pct.bad { color: var(--poppy); }
+
+  .lifecycle-sub {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--indigo-light);
+    margin-bottom: 4px;
+  }
+
+  .lifecycle-detail {
+    font-size: 12px;
+    color: var(--indigo-light);
+    line-height: 1.4;
+  }
+
+  /* ── VISUAL 3: Dashboard ── */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .stat-card {
+    background: var(--gray-light);
+    border-radius: 10px;
+    padding: 28px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+  .stat-card.red::after { background: var(--poppy); }
+  .stat-card.blue::after { background: var(--indigo); }
+  .stat-card.green::after { background: var(--forest); }
+  .stat-card.amber::after { background: var(--dun); }
+
+  .stat-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 38px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-card.red .stat-value { color: var(--poppy); }
+  .stat-card.blue .stat-value { color: var(--indigo); }
+  .stat-card.green .stat-value { color: var(--forest); }
+  .stat-card.amber .stat-value { color: #9A7B4F; }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--indigo-light);
+    margin-bottom: 4px;
+  }
+
+  .stat-context {
+    font-size: 11px;
+    color: var(--gray);
+    line-height: 1.4;
+  }
+
+  .pci-breakdown {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .pci-chart-panel {
+    background: var(--indigo-dark);
+    border-radius: 12px;
+    padding: 32px;
+    min-height: 320px;
+  }
+
+  .pci-chart-panel h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+
+  .pci-bar-group {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .pci-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .pci-bar-label {
+    font-size: 12px;
+    color: rgba(254,254,254,0.7);
+    width: 80px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .pci-bar-track {
+    flex: 1;
+    height: 28px;
+    background: rgba(254,254,254,0.06);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pci-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    transition: width 0.8s ease;
+  }
+
+  .pci-bar-fill.excellent { background: var(--forest); }
+  .pci-bar-fill.good { background: var(--indigo-light); }
+  .pci-bar-fill.fair { background: var(--dun); }
+  .pci-bar-fill.poor { background: var(--poppy); }
+
+  .pci-legend {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(254,254,254,0.08);
+  }
+
+  .pci-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: rgba(254,254,254,0.5);
+  }
+
+  .pci-legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+  }
+
+  .debt-panel {
+    background: var(--gray-light);
+    border-radius: 12px;
+    padding: 32px;
+  }
+
+  .debt-panel h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--indigo-dark);
+    margin-bottom: 20px;
+  }
+
+  .debt-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .debt-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .debt-fund-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--indigo-dark);
+    width: 100px;
+    flex-shrink: 0;
+  }
+
+  .debt-bar-track {
+    flex: 1;
+    height: 32px;
+    background: var(--white);
+    border-radius: 4px;
+    border: 1px solid var(--gray-mid);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .debt-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .debt-amount {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--indigo-dark);
+    min-width: 60px;
+    text-align: right;
+  }
+
+  .debt-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 16px;
+    margin-top: 8px;
+    border-top: 2px solid var(--indigo-dark);
+  }
+
+  .debt-total-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--indigo-dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .debt-total-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--poppy);
+  }
+
+  /* ── VISUAL 4: Funding Gap ── */
+  .gap-overview {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .gap-card {
+    border-radius: 12px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gap-card.cip {
+    background: var(--indigo-dark);
+    color: var(--white);
+  }
+  .gap-card.funded {
+    background: var(--gray-light);
+    border: 1px solid var(--gray-mid);
+  }
+  .gap-card.unfunded {
+    background: var(--poppy);
+    color: var(--white);
+  }
+
+  .gap-card-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 0.7;
+  }
+  .gap-card.cip .gap-card-label { color: var(--gray); }
+  .gap-card.funded .gap-card-label { color: var(--indigo-light); }
+
+  .gap-card-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .gap-card.funded .gap-card-value { color: var(--indigo-dark); }
+
+  .gap-card-desc {
+    font-size: 13px;
+    line-height: 1.5;
+    opacity: 0.8;
+  }
+  .gap-card.funded .gap-card-desc { color: var(--indigo-light); }
+
+  .gap-waterfall {
+    background: var(--gray-light);
+    border-radius: 12px;
+    padding: 36px;
+  }
+
+  .gap-waterfall h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--indigo-dark);
+    margin-bottom: 24px;
+  }
+
+  .waterfall-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .waterfall-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 80px;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 0;
+  }
+
+  .waterfall-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--indigo-dark);
+  }
+
+  .waterfall-bar-track {
+    height: 24px;
+    background: var(--white);
+    border-radius: 4px;
+    border: 1px solid var(--gray-mid);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .waterfall-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+  }
+  .waterfall-bar-fill.water { background: var(--indigo); }
+  .waterfall-bar-fill.wastewater { background: var(--indigo-light); }
+  .waterfall-bar-fill.streets { background: var(--poppy); }
+  .waterfall-bar-fill.north-sewer { background: var(--poppy-light); }
+  .waterfall-bar-fill.squaw { background: var(--dun); }
+
+  .waterfall-amount {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--indigo-dark);
+    text-align: right;
+  }
+
+  .waterfall-divider {
+    grid-column: 1 / -1;
+    height: 1px;
+    background: var(--gray-mid);
+    margin: 4px 0;
+  }
+
+  .waterfall-total {
+    display: grid;
+    grid-template-columns: 200px 1fr 80px;
+    align-items: center;
+    gap: 16px;
+    padding-top: 12px;
+    border-top: 2px solid var(--indigo-dark);
+    margin-top: 8px;
+  }
+
+  .waterfall-total .waterfall-label {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .waterfall-total .waterfall-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--poppy);
+  }
+
+  .unfunded-callout {
+    background: rgba(217,56,51,0.04);
+    border: 1px solid rgba(217,56,51,0.15);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-top: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .callout-icon {
+    font-size: 20px;
+    color: var(--poppy);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .callout-text {
+    font-size: 13px;
+    color: var(--indigo-dark);
+    line-height: 1.6;
+  }
+  .callout-text strong { color: var(--poppy); }
+
+  /* ── Footer ── */
+  .page-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 32px;
+  }
+
+  .footer-brand {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .footer-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--poppy) 0%, var(--indigo) 100%);
+  }
+
+  @media (max-width: 900px) {
+    .cover, .page { padding: 40px; }
+    .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
+    .cost-curve-wrapper, .pci-breakdown, .gap-overview { grid-template-columns: 1fr; }
+    .timeline-year-group { padding-left: 100px; }
+    .timeline-year-label { font-size: 22px; width: 70px; }
+    .timeline-year-line { left: 82px; }
+    .timeline-event::before { left: -25px; }
+    .timeline-events { padding-left: 20px; }
+  }
+
+  @media print {
+    .page { page-break-after: always; min-height: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════ -->
+<!-- COVER PAGE                              -->
+<!-- ════════════════════════════════════════ -->
+<section class="cover">
+  <div class="cover-label">The Citizen · Data Review</div>
+  <h1>Maintenance Backlog: The Invisible Liability</h1>
+  <h2>Visual aids and data analysis supporting an investigation into deferred infrastructure maintenance, cost escalation, and fiscal exposure in Willow Park, Texas.</h2>
+  <div class="cover-meta">
+    Published <span>February 2026</span> · Sources: City Council Packets (FY 2022–2025), IMS Pavement Survey (July 2025), ASCE 2025 Report Card, GFOA Best Practices
+  </div>
+  <div class="cover-bar"></div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- VISUAL 1: Infrastructure Decision Timeline -->
+<!-- ════════════════════════════════════════ -->
+<section class="page" id="timeline">
+  <div class="page-number">Visual 1 of 4</div>
+  <div class="section-label">Timeline</div>
+  <h2>Infrastructure Decision Timeline</h2>
+  <p class="page-subtitle">Key capital infrastructure actions, cost escalations, and planning milestones from CIP adoption through projected completion — showing how conditions changed while the plan stayed static.</p>
+
+  <div class="timeline-container">
+    <div class="timeline-track">
+
+      <!-- 2022 -->
+      <div class="timeline-year-group">
+        <div class="timeline-year-label">2022</div>
+        <div class="timeline-year-line"></div>
+        <div class="timeline-events">
+          <div class="timeline-event highlight">
+            <div class="event-date">Jun</div>
+            <div class="event-content">
+              <div class="event-title">North Side Sewer needs presented to Council</div>
+              <div class="event-detail">Derek Turner (Jacob & Martin) outlines $28.2M in future wastewater infrastructure — unfunded, not in CIP</div>
+            </div>
+            <div class="event-figure">$28.2M</div>
+          </div>
+          <div class="timeline-event highlight">
+            <div class="event-date">Sep 12</div>
+            <div class="event-content">
+              <div class="event-title">Hilltop Securities Street Repair Tax Impact Study</div>
+              <div class="event-detail">Analyzes $2M–$5M financing scenarios; assessed valuation $741.8M; I&S rate $0.2650</div>
+            </div>
+          </div>
+          <div class="timeline-event highlight">
+            <div class="event-date">Sep 13</div>
+            <div class="event-content">
+              <div class="event-title">CIP adopted by City Council</div>
+              <div class="event-detail">$70.4M in identified capital needs; impact fees set at $2,993 (water) / $3,249 (wastewater)</div>
+            </div>
+            <div class="event-figure">$70.4M</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="timeline-year-group">
+        <div class="timeline-year-label">2023</div>
+        <div class="timeline-year-line"></div>
+        <div class="timeline-events">
+          <div class="timeline-event">
+            <div class="event-date">Apr</div>
+            <div class="event-content">
+              <div class="event-title">Bankhead gravity sewer main estimated</div>
+              <div class="event-detail">5,500 LF of 8" PVC gravity sewer — preliminary cost $1.15M</div>
+            </div>
+            <div class="event-figure">$1.15M</div>
+          </div>
+          <div class="timeline-event caution">
+            <div class="event-date">May</div>
+            <div class="event-content">
+              <div class="event-title">WWTP bids opened — low bidder withdraws</div>
+              <div class="event-detail">MH Civil low bid $14.88M → withdrew citing material errors. Next bid: Gracon at $20.56M</div>
+            </div>
+            <div class="event-figure">$20.56M</div>
+          </div>
+          <div class="timeline-event">
+            <div class="event-date">Jun</div>
+            <div class="event-content">
+              <div class="event-title">All WWTP bids rejected; Phase 2 Drainage awarded</div>
+              <div class="event-detail">Council rejects all wastewater bids; awards $1.02M drainage contract to JRM Construction</div>
+            </div>
+          </div>
+          <div class="timeline-event">
+            <div class="event-date">Aug</div>
+            <div class="event-content">
+              <div class="event-title">NewGen rate study begins</div>
+              <div class="event-detail">3-year plan to make wastewater fund self-sustaining; Year 1 rate increases implemented FY 2023-24</div>
+            </div>
+          </div>
+          <div class="timeline-event highlight">
+            <div class="event-date">Nov 14</div>
+            <div class="event-content">
+              <div class="event-title">WWTP rebid awarded to Gracon</div>
+              <div class="event-detail">Base $13.61M + $940K alternate = $14.55M total. Notice of intent for $4M gap-funding CO</div>
+            </div>
+            <div class="event-figure">$14.55M</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="timeline-year-group">
+        <div class="timeline-year-label">2024</div>
+        <div class="timeline-year-line"></div>
+        <div class="timeline-events">
+          <div class="timeline-event">
+            <div class="event-date">Jan 9</div>
+            <div class="event-content">
+              <div class="event-title">$4M supplemental CO issued for WWTP gap</div>
+              <div class="event-detail">Series 2024 Certificate of Obligation covers gap between TWDB funding and construction costs</div>
+            </div>
+            <div class="event-figure">$4.0M</div>
+          </div>
+          <div class="timeline-event">
+            <div class="event-date">Apr 29</div>
+            <div class="event-content">
+              <div class="event-title">WWTP effluent line completed</div>
+              <div class="event-detail">Line to Squaw Creek Golf Course accepted by staff; TWDB CWSRF project</div>
+            </div>
+          </div>
+          <div class="timeline-event caution">
+            <div class="event-date">Aug–Oct</div>
+            <div class="event-content">
+              <div class="event-title">$5.135M CO postponed three times</div>
+              <div class="event-detail">Series 2024A for water/wastewater improvements delayed Aug 13 → Sep 24 → Oct 22 → Nov 12. Reason: developer agreement not finalized</div>
+            </div>
+            <div class="event-figure">$5.14M</div>
+          </div>
+          <div class="timeline-event">
+            <div class="event-date">Oct</div>
+            <div class="event-content">
+              <div class="event-title">IMS pavement assessment contracted</div>
+              <div class="event-detail">$31,320 contract for 100% survey of city road network — 66 miles, 738 segments</div>
+            </div>
+          </div>
+          <div class="timeline-event">
+            <div class="event-date">FY 24</div>
+            <div class="event-content">
+              <div class="event-title">Budget amendments reflect fiscal strain</div>
+              <div class="event-detail">GF revenue −$450K; Water purchases +$400K; Engineering +$200K; M&O-to-I&S transfer reduced −$240K</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2025 -->
+      <div class="timeline-year-group">
+        <div class="timeline-year-label">2025</div>
+        <div class="timeline-year-line"></div>
+        <div class="timeline-events">
+          <div class="timeline-event highlight">
+            <div class="event-date">Jul</div>
+            <div class="event-content">
+              <div class="event-title">IMS Pavement Survey completed</div>
+              <div class="event-detail">Overall PCI 68 · Asphalt 65 · Concrete 72 · 15.3% of asphalt roads in backlog (below PCI 40)</div>
+            </div>
+            <div class="event-figure">PCI 68</div>
+          </div>
+          <div class="timeline-event caution">
+            <div class="event-date">Jan–Jul</div>
+            <div class="event-content">
+              <div class="event-title">20 water main leaks — 3.17M gallons lost</div>
+              <div class="event-detail">Four leaks on single 12" main = 79% of total loss (2.5M gallons). Water fund at 115% of operating budget</div>
+            </div>
+            <div class="event-figure">3.17M gal</div>
+          </div>
+          <div class="timeline-event">
+            <div class="event-date">2025</div>
+            <div class="event-content">
+              <div class="event-title">Tax Note Series 2025 issued — street overlays</div>
+              <div class="event-detail">$1.56M at 3.85% to JPMorgan Chase (matures 2032). Funds P2 Stabilizer + overlay on 13 streets</div>
+            </div>
+            <div class="event-figure">$1.56M</div>
+          </div>
+          <div class="timeline-event highlight">
+            <div class="event-date">Dec 9</div>
+            <div class="event-content">
+              <div class="event-title">Council votes unanimously to update Comp Plan & CIP</div>
+              <div class="event-detail">Jacob & Martin PSA approved. Contreras, Gilliland, Wright, Smith, Crummel — all in favor</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2026–2027 -->
+      <div class="timeline-year-group">
+        <div class="timeline-year-label" style="opacity:0.5">2026–27</div>
+        <div class="timeline-year-line" style="border-left: 3px dashed var(--gray-mid); background: none;"></div>
+        <div class="timeline-events">
+          <div class="timeline-event" style="opacity:0.65; border-left: 3px dashed var(--gray);">
+            <div class="event-date">2026</div>
+            <div class="event-content">
+              <div class="event-title">Updated CIP & Comprehensive Plan — deliverables expected</div>
+              <div class="event-detail">Jacob & Martin contract active. New plan will be first formal revision since September 2022</div>
+            </div>
+          </div>
+          <div class="timeline-event" style="opacity:0.65; border-left: 3px dashed var(--gray);">
+            <div class="event-date">Early 2027</div>
+            <div class="event-content">
+              <div class="event-title">Squaw Creek Road reconstruction — targeted completion</div>
+              <div class="event-detail">Full road reconstruction + water line replacement; $9.9M project; announced at May 2025 town hall</div>
+            </div>
+            <div class="event-figure">$9.9M</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="source-note">
+    <strong>Sources:</strong> Willow Park City Council Packets (FY 2022–2025), IMS Infrastructure Management Services Pavement Condition Survey (July 2025), Hilltop Securities Street Repair Tax Impact Study (Sep 2022), Willow Park Municode Meetings Hub, Willow Park Civics meeting records.
+  </div>
+  <div class="footer-bar"></div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- VISUAL 2: Deferred Cost Curve            -->
+<!-- ════════════════════════════════════════ -->
+<section class="page" id="cost-curve">
+  <div class="page-number">Visual 2 of 4</div>
+  <div class="section-label">Cost Escalation</div>
+  <h2>The Deferred Maintenance Cost Curve</h2>
+  <p class="page-subtitle">Every dollar of deferred maintenance becomes $4–$5 in future replacement costs. The IMS pavement life cycle data shows exactly where the inflection point hits — and why timing is everything.</p>
+
+  <div class="cost-curve-wrapper">
+    <div class="curve-chart">
+      <h3>Pavement Life Cycle Curve</h3>
+      <div class="curve-svg-container">
+        <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grid lines -->
+          <line x1="50" y1="20" x2="50" y2="220" stroke="rgba(254,254,254,0.08)" stroke-width="1"/>
+          <line x1="50" y1="220" x2="380" y2="220" stroke="rgba(254,254,254,0.15)" stroke-width="1"/>
+          <line x1="50" y1="170" x2="380" y2="170" stroke="rgba(254,254,254,0.05)" stroke-width="1" stroke-dasharray="4"/>
+          <line x1="50" y1="120" x2="380" y2="120" stroke="rgba(254,254,254,0.05)" stroke-width="1" stroke-dasharray="4"/>
+          <line x1="50" y1="70" x2="380" y2="70" stroke="rgba(254,254,254,0.05)" stroke-width="1" stroke-dasharray="4"/>
+
+          <!-- Y-axis labels -->
+          <text x="45" y="25" text-anchor="end" fill="rgba(254,254,254,0.4)" font-size="9" font-family="DM Sans">100</text>
+          <text x="45" y="75" text-anchor="end" fill="rgba(254,254,254,0.4)" font-size="9" font-family="DM Sans">75</text>
+          <text x="45" y="125" text-anchor="end" fill="rgba(254,254,254,0.4)" font-size="9" font-family="DM Sans">50</text>
+          <text x="45" y="175" text-anchor="end" fill="rgba(254,254,254,0.4)" font-size="9" font-family="DM Sans">25</text>
+          <text x="45" y="225" text-anchor="end" fill="rgba(254,254,254,0.4)" font-size="9" font-family="DM Sans">0</text>
+
+          <!-- X-axis labels -->
+          <text x="50" y="240" text-anchor="start" fill="rgba(254,254,254,0.4)" font-size="9" font-family="DM Sans">0%</text>
+          <text x="182" y="240" text-anchor="middle" fill="rgba(254,254,254,0.4)" font-size="9" font-family="DM Sans">40%</text>
+          <text x="231" y="240" text-anchor="middle" fill="rgba(254,254,254,0.4)" font-size="9" font-family="DM Sans">55%</text>
+          <text x="380" y="240" text-anchor="end" fill="rgba(254,254,254,0.4)" font-size="9" font-family="DM Sans">100%</text>
+
+          <!-- Axis titles -->
+          <text x="215" y="256" text-anchor="middle" fill="rgba(254,254,254,0.3)" font-size="8" font-family="DM Sans" letter-spacing="1.5" text-transform="uppercase">SERVICE LIFE</text>
+
+          <!-- "Good" zone -->
+          <rect x="50" y="20" width="132" height="200" fill="rgba(84,140,47,0.06)" rx="0"/>
+          <!-- "Danger" zone -->
+          <rect x="182" y="20" width="49" height="200" fill="rgba(217,56,51,0.08)" rx="0"/>
+
+          <!-- Inflection marker -->
+          <line x1="182" y1="20" x2="182" y2="220" stroke="rgba(217,56,51,0.4)" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="182" y="14" text-anchor="middle" fill="#D93833" font-size="8" font-weight="700" font-family="DM Sans" letter-spacing="0.5">INFLECTION</text>
+
+          <!-- The curve path: gradual decline first 40%, then sharp drop -->
+          <path d="M50,23 C100,26 140,32 182,50 C200,90 215,150 235,185 C260,205 320,215 380,218"
+                fill="none" stroke="#D93833" stroke-width="2.5" stroke-linecap="round"/>
+
+          <!-- PCI 40 threshold line -->
+          <line x1="50" y1="140" x2="380" y2="140" stroke="rgba(217,56,51,0.25)" stroke-width="1" stroke-dasharray="6,3"/>
+          <text x="383" y="143" fill="rgba(217,56,51,0.5)" font-size="8" font-family="DM Sans" font-weight="600">PCI 40</text>
+
+          <!-- Annotation: first zone -->
+          <text x="116" y="52" text-anchor="middle" fill="rgba(84,140,47,0.7)" font-size="8" font-weight="700" font-family="DM Sans">−15% quality</text>
+          <text x="116" y="62" text-anchor="middle" fill="rgba(84,140,47,0.5)" font-size="7" font-family="DM Sans">over 40% of life</text>
+
+          <!-- Annotation: danger zone -->
+          <text x="207" y="100" text-anchor="middle" fill="rgba(217,56,51,0.8)" font-size="8" font-weight="700" font-family="DM Sans">−40% quality</text>
+          <text x="207" y="110" text-anchor="middle" fill="rgba(217,56,51,0.6)" font-size="7" font-family="DM Sans">in just 15% of life</text>
+
+          <!-- Willow Park marker at PCI 68 -->
+          <circle cx="165" cy="44" r="4" fill="#D93833" stroke="var(--white)" stroke-width="1.5"/>
+          <text x="165" y="38" text-anchor="middle" fill="var(--white)" font-size="7.5" font-weight="700" font-family="DM Sans">WP: PCI 68</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="multiplier-panel">
+      <div class="multiplier-card">
+        <div class="multiplier-icon">$1 → $4–$5</div>
+        <div class="multiplier-label">GFOA Cost Multiplier</div>
+        <div class="multiplier-desc">Every $1 of deferred maintenance today becomes $4 to $5 in future replacement costs. This applies across all asset types — roads, water, sewer, and drainage.</div>
+      </div>
+      <div class="multiplier-card alt">
+        <div class="multiplier-icon">15.3%</div>
+        <div class="multiplier-label">Asphalt Backlog</div>
+        <div class="multiplier-desc">Of Willow Park's asphalt road network rates below PCI 40 — past the point where surface treatments like seal coats or overlays are effective. These roads require reconstruction.</div>
+      </div>
+      <div class="multiplier-card">
+        <div class="multiplier-icon">8%</div>
+        <div class="multiplier-label">Total Network Backlog</div>
+        <div class="multiplier-desc">Of the entire 66-mile road network (asphalt + concrete) falls below PCI 40. Concrete roads: 0% in backlog. The problem is concentrated in asphalt surfaces.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lifecycle-callout">
+    <div class="lifecycle-box">
+      <div class="lifecycle-pct good">40%</div>
+      <div class="lifecycle-sub">of service life</div>
+      <div class="lifecycle-detail">Only 15% quality drop.<br>Seal coats and preventive maintenance keep costs low — $2,500–$5,000 per lane-mile.</div>
+    </div>
+    <div class="lifecycle-box">
+      <div class="lifecycle-pct bad">15%</div>
+      <div class="lifecycle-sub">of service life</div>
+      <div class="lifecycle-detail">40% quality drop.<br>Past the inflection point — overlays cost $30K–$60K. Full reconstruction: $150K–$400K per lane-mile.</div>
+    </div>
+  </div>
+
+  <div class="source-note">
+    <strong>Sources:</strong> IMS Infrastructure Management Services Pavement Condition Survey (July 2025), GFOA Capital Asset Management Best Practices, ASCE 2025 Infrastructure Report Card. Curve illustration adapted from IMS life cycle model.
+  </div>
+  <div class="footer-bar"></div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- VISUAL 3: Infrastructure Dashboard       -->
+<!-- ════════════════════════════════════════ -->
+<section class="page" id="dashboard">
+  <div class="page-number">Visual 3 of 4</div>
+  <div class="section-label">Infrastructure Snapshot</div>
+  <h2>Willow Park Infrastructure at a Glance</h2>
+  <p class="page-subtitle">Key condition indicators, debt metrics, and system performance data from FY 2024 audited financials, FY 2025 quarterly reports, and the July 2025 IMS pavement assessment.</p>
+
+  <div class="dashboard-grid">
+    <div class="stat-card blue">
+      <div class="stat-value">68</div>
+      <div class="stat-label">Overall PCI</div>
+      <div class="stat-context">Low end of "Good" (60–70 scale).<br>National avg: 60–65.</div>
+    </div>
+    <div class="stat-card red">
+      <div class="stat-value">$59.2M</div>
+      <div class="stat-label">Total Debt</div>
+      <div class="stat-context">As of Sep 2025 (FY Q4).<br>Across all funds.</div>
+    </div>
+    <div class="stat-card amber">
+      <div class="stat-value">$60.1M</div>
+      <div class="stat-label">Capital Assets</div>
+      <div class="stat-context">Net of depreciation, FY 2024.<br>Replacement cost substantially higher.</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-value">$70.4M</div>
+      <div class="stat-label">CIP Identified Needs</div>
+      <div class="stat-context">Adopted Sep 2022.<br>Not updated since.</div>
+    </div>
+  </div>
+
+  <div class="pci-breakdown">
+    <div class="pci-chart-panel">
+      <h3>Pavement Condition by Classification</h3>
+      <div class="pci-bar-group">
+        <div class="pci-bar-row">
+          <div class="pci-bar-label">Arterials</div>
+          <div class="pci-bar-track">
+            <div class="pci-bar-fill excellent" style="width: 78%;">78</div>
+          </div>
+        </div>
+        <div class="pci-bar-row">
+          <div class="pci-bar-label">Concrete</div>
+          <div class="pci-bar-track">
+            <div class="pci-bar-fill excellent" style="width: 72%;">72</div>
+          </div>
+        </div>
+        <div class="pci-bar-row">
+          <div class="pci-bar-label">Collectors</div>
+          <div class="pci-bar-track">
+            <div class="pci-bar-fill good" style="width: 69%;">69</div>
+          </div>
+        </div>
+        <div class="pci-bar-row">
+          <div class="pci-bar-label">Overall</div>
+          <div class="pci-bar-track">
+            <div class="pci-bar-fill good" style="width: 68%;">68</div>
+          </div>
+        </div>
+        <div class="pci-bar-row">
+          <div class="pci-bar-label">Local</div>
+          <div class="pci-bar-track">
+            <div class="pci-bar-fill good" style="width: 66%;">66</div>
+          </div>
+        </div>
+        <div class="pci-bar-row">
+          <div class="pci-bar-label">Asphalt</div>
+          <div class="pci-bar-track">
+            <div class="pci-bar-fill fair" style="width: 65%;">65</div>
+          </div>
+        </div>
+      </div>
+      <div class="pci-legend">
+        <div class="pci-legend-item"><div class="pci-legend-dot" style="background: var(--forest);"></div> 70+ Excellent</div>
+        <div class="pci-legend-item"><div class="pci-legend-dot" style="background: var(--indigo-light);"></div> 60–70 Good</div>
+        <div class="pci-legend-item"><div class="pci-legend-dot" style="background: var(--dun);"></div> 50–60 Fair</div>
+        <div class="pci-legend-item"><div class="pci-legend-dot" style="background: var(--poppy);"></div> &lt;40 Poor/Backlog</div>
+      </div>
+    </div>
+
+    <div class="debt-panel">
+      <h3>Debt by Fund — FY 2025 Q4</h3>
+      <div class="debt-stack">
+        <div class="debt-row">
+          <div class="debt-fund-label">Wastewater</div>
+          <div class="debt-bar-track">
+            <div class="debt-bar-fill" style="width: 37.2%; background: var(--poppy);">$22.0M</div>
+          </div>
+          <div class="debt-amount">37.2%</div>
+        </div>
+        <div class="debt-row">
+          <div class="debt-fund-label">General</div>
+          <div class="debt-bar-track">
+            <div class="debt-bar-fill" style="width: 37.0%; background: var(--indigo);">$21.9M</div>
+          </div>
+          <div class="debt-amount">37.0%</div>
+        </div>
+        <div class="debt-row">
+          <div class="debt-fund-label">Water</div>
+          <div class="debt-bar-track">
+            <div class="debt-bar-fill" style="width: 20.1%; background: var(--indigo-light);">$11.9M</div>
+          </div>
+          <div class="debt-amount">20.1%</div>
+        </div>
+        <div class="debt-row">
+          <div class="debt-fund-label">Drainage</div>
+          <div class="debt-bar-track">
+            <div class="debt-bar-fill" style="width: 5.7%; background: var(--dun);"></div>
+          </div>
+          <div class="debt-amount">$3.4M</div>
+        </div>
+        <div class="debt-total-row">
+          <div class="debt-total-label">Total Outstanding Debt</div>
+          <div class="debt-total-value">$59.24M</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="source-note">
+    <strong>Sources:</strong> IMS Infrastructure Management Services Pavement Condition Survey (July 2025), Willow Park FY 2024 Audited Financial Statements, FY 2025 Quarterly Financial Reports. PCI scale: 0–100 (ASTM D6433). Debt figures reflect principal outstanding as of September 2025.
+  </div>
+  <div class="footer-bar"></div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- VISUAL 4: Funding Gap Analysis           -->
+<!-- ════════════════════════════════════════ -->
+<section class="page" id="funding-gap">
+  <div class="page-number">Visual 4 of 4</div>
+  <div class="section-label">Funding Gap Analysis</div>
+  <h2>The Gap Between Need and Funding</h2>
+  <p class="page-subtitle">The 2022 CIP identified $70.4M in capital needs. Since then, costs have escalated, unfunded obligations have emerged, and the plan has not been formally revised. Here's how the numbers stack up.</p>
+
+  <div class="gap-overview">
+    <div class="gap-card cip">
+      <div class="gap-card-label">2022 CIP Identified Needs</div>
+      <div class="gap-card-value">$70.4M</div>
+      <div class="gap-card-desc">Water ($18.95M), Wastewater ($16.62M), Streets & Drainage ($34.80M). Adopted September 2022. Not formally amended since.</div>
+    </div>
+    <div class="gap-card funded">
+      <div class="gap-card-label">Current Total Debt</div>
+      <div class="gap-card-value">$59.2M</div>
+      <div class="gap-card-desc">Already leveraged across all four funds. The city is carrying nearly as much debt as the CIP identified in total capital needs.</div>
+    </div>
+    <div class="gap-card unfunded">
+      <div class="gap-card-label">Known Unfunded Pipeline</div>
+      <div class="gap-card-value">$28.2M</div>
+      <div class="gap-card-desc">North Side Sewer requirements alone — $19M north of Ranch House + $9.2M south. Not in the 2022 CIP. No identified funding source.</div>
+    </div>
+  </div>
+
+  <div class="gap-waterfall">
+    <h3>Capital Infrastructure — Need vs. Scale</h3>
+    <div class="waterfall-rows">
+      <div class="waterfall-row">
+        <div class="waterfall-label">Streets & Drainage (CIP)</div>
+        <div class="waterfall-bar-track">
+          <div class="waterfall-bar-fill streets" style="width: 35.3%;"></div>
+        </div>
+        <div class="waterfall-amount">$34.80M</div>
+      </div>
+      <div class="waterfall-row">
+        <div class="waterfall-label">North Side Sewer (unfunded)</div>
+        <div class="waterfall-bar-track">
+          <div class="waterfall-bar-fill north-sewer" style="width: 28.6%;"></div>
+        </div>
+        <div class="waterfall-amount">$28.20M</div>
+      </div>
+      <div class="waterfall-row">
+        <div class="waterfall-label">Wastewater System (CIP)</div>
+        <div class="waterfall-bar-track">
+          <div class="waterfall-bar-fill wastewater" style="width: 22.4%;"></div>
+        </div>
+        <div class="waterfall-amount">$16.62M</div>
+      </div>
+      <div class="waterfall-row">
+        <div class="waterfall-label">Water Infrastructure (CIP)</div>
+        <div class="waterfall-bar-track">
+          <div class="waterfall-bar-fill water" style="width: 19.2%;"></div>
+        </div>
+        <div class="waterfall-amount">$18.95M</div>
+      </div>
+      <div class="waterfall-row">
+        <div class="waterfall-label">Squaw Creek Reconstruction</div>
+        <div class="waterfall-bar-track">
+          <div class="waterfall-bar-fill squaw" style="width: 10.0%;"></div>
+        </div>
+        <div class="waterfall-amount">$9.90M</div>
+      </div>
+      <div class="waterfall-divider"></div>
+      <div class="waterfall-total">
+        <div class="waterfall-label">Known Capital Obligations</div>
+        <div></div>
+        <div class="waterfall-amount">~$98.6M</div>
+      </div>
+    </div>
+
+    <div class="unfunded-callout">
+      <div class="callout-icon">⚠</div>
+      <div class="callout-text">
+        <strong>$98.6M in known capital needs</strong> against $59.2M in existing debt — and that total does not include a comprehensive deferred maintenance inventory for water mains, sewer lines, or storm drains. The 2022 CIP's $70.4M figure was built on assumptions that have materially changed. The GFOA recommends CIPs be treated as living documents and updated regularly. Willow Park's has been static for over three years. The December 2025 vote to update the Comprehensive Plan and CIP is the necessary first step toward quantifying the full gap.
+      </div>
+    </div>
+  </div>
+
+  <div class="source-note">
+    <strong>Sources:</strong> Willow Park 2022 Capital Improvement Plan, FY 2025 Quarterly Financial Reports, North Side Sewer presentation (Jacob & Martin, June 2022), Squaw Creek Road Reconstruction estimates (May 2025 Town Hall). Note: Figures reflect identified project-level costs and do not constitute a comprehensive deferred maintenance inventory. Overlap may exist between CIP line items and individual project estimates. The ~$98.6M total is illustrative of known scale, not a precise cumulative obligation.
+  </div>
+  <div class="footer-bar"></div>
+</section>
+
+</body>
+</html>
