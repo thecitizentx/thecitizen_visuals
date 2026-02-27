@@ -20,6 +20,8 @@ This repo hosts standalone, interactive HTML visuals that accompany our Substack
 | File | Title | Description |
 |------|-------|-------------|
 | [`Maintenance_Backlog_Data_Review.html`](./Maintenance_Backlog_Data_Review.html) | Maintenance Backlog — Data Review | — |
+| [`econ-dev-toolbox.html`](./econ-dev-toolbox.html) | The Economic Development Toolbox | — |
+| [`entrepreneurial-conditions.html`](./entrepreneurial-conditions.html) | Entrepreneurial Conditions | — |
 | [`tax-base-interactive.html`](./tax-base-interactive.html) | Tax Base Impact Over Time Interactive | How shifting land use percentages compound into dramatically different fiscal outcomes over 15 years of incremental rezoning. |
 | [`zoning-compounding-interactive.html`](./zoning-compounding-interactive.html) | How Zoning Decisions Compound Over Time | Interactive visuals showing how incremental rezoning decisions transform communities over time. Land use diagrams and tax base impact data. |
 | [`zoning-compounding-visuals.html`](./zoning-compounding-visuals.html) | How Zoning Decisions Compound Over Time | Interactive visuals showing how incremental rezoning decisions transform communities over time. Land use diagrams and tax base impact data. |
