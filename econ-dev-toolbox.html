@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Economic Development Toolbox — The Citizen</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red:    #D93833;
+    --navy:   #33425C;
+    --jet:    #373435;
+    --white:  #FEFEFE;
+    --rule:   #E8E4E0;
+    --muted:  #8A8585;
+    --bg:     #F7F5F2;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--jet);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .wrapper {
+    width: 100%;
+    max-width: 820px;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-top: 3px solid var(--navy);
+    padding-top: 16px;
+    margin-bottom: 28px;
+    gap: 16px;
+  }
+
+  .header-left {}
+
+  .label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+
+  .title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    line-height: 1.15;
+    color: var(--navy);
+  }
+
+  .pub-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1.5px solid var(--rule);
+    padding: 4px 10px;
+    white-space: nowrap;
+    margin-top: 4px;
+  }
+
+  /* FILTER BAR */
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .filter-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1.5px solid var(--rule);
+    background: var(--white);
+    color: var(--muted);
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    border-color: var(--navy);
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  /* CARDS */
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .card {
+    background: var(--white);
+    border-left: 4px solid transparent;
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card.hidden { display: none; }
+
+  .card:hover {
+    border-left-color: var(--red);
+    box-shadow: 4px 0 0 0 var(--red) inset;
+  }
+
+  .card.expanded {
+    border-left-color: var(--navy);
+  }
+
+  .card-tool {
+    padding: 20px 20px 20px 20px;
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .tool-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .tool-tag {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    margin-top: 4px;
+  }
+
+  .tag-direct  { background: #EBF0F7; color: var(--navy); }
+  .tag-zone    { background: #FBF0F0; color: var(--red); }
+  .tag-abate   { background: #F2F1EE; color: var(--muted); }
+
+  .card-what {
+    padding: 20px;
+    border-right: 1px solid var(--rule);
+  }
+
+  .card-tradeoff {
+    padding: 20px;
+  }
+
+  .cell-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+
+  .cell-text {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--jet);
+  }
+
+  /* EXPANDED DETAIL */
+  .card-detail {
+    display: none;
+    grid-column: 1 / -1;
+    background: var(--navy);
+    padding: 20px 24px;
+    gap: 24px;
+  }
+
+  .card.expanded .card-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .detail-block {}
+
+  .detail-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 8px;
+  }
+
+  .detail-text {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .detail-text strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* COLUMN HEADERS */
+  .col-headers {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    padding: 0 0 8px 0;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 3px;
+  }
+
+  .col-head {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 20px;
+  }
+
+  .col-head:first-child { padding-left: 20px; }
+
+  /* FOOTER NOTE */
+  .foot-note {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .foot-icon {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .foot-icon span {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--red);
+    line-height: 1;
+  }
+
+  .foot-text {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .expand-hint {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-align: right;
+    margin-bottom: 6px;
+  }
+
+  @media (max-width: 640px) {
+    .card,
+    .col-headers {
+      grid-template-columns: 1fr;
+    }
+    .card-what,
+    .card-tool {
+      border-right: none;
+      border-bottom: 1px solid var(--rule);
+    }
+    .card.expanded .card-detail {
+      grid-template-columns: 1fr;
+    }
+    .col-head { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="header">
+    <div class="header-left">
+      <div class="label">Economic Development Series</div>
+      <div class="title">The Municipal Toolbox</div>
+    </div>
+    <div class="pub-badge">The Citizen</div>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All Tools</button>
+    <button class="filter-btn" data-filter="direct">Direct Incentive</button>
+    <button class="filter-btn" data-filter="zone">Zone-Based</button>
+    <button class="filter-btn" data-filter="abate">Abatement</button>
+  </div>
+
+  <div class="expand-hint">↓ Click any row to expand detail</div>
+
+  <div class="col-headers">
+    <div class="col-head">Tool</div>
+    <div class="col-head">What It Does</div>
+    <div class="col-head">Key Tradeoff</div>
+  </div>
+
+  <div class="cards" id="cards">
+
+    <!-- Type A/B -->
+    <div class="card" data-type="direct">
+      <div class="card-tool">
+        <div>
+          <div class="tool-name">Type A / Type B EDC</div>
+          <span class="tool-tag tag-direct">Direct Incentive</span>
+        </div>
+      </div>
+      <div class="card-what">
+        <div class="cell-label">What It Does</div>
+        <div class="cell-text">Nonprofit corporation funded by up to ½-cent sales tax. Type A targets industrial and primary employers. Type B is broader — parks, sports facilities, quality-of-life projects.</div>
+      </div>
+      <div class="card-tradeoff">
+        <div class="cell-label">Key Tradeoff</div>
+        <div class="cell-text">Governed by appointed boards, not elected councils. Moves fast, but limited public visibility into decisions.</div>
+      </div>
+      <div class="card-detail">
+        <div class="detail-block">
+          <div class="detail-label">Legal Authority</div>
+          <div class="detail-text">Texas Local Government Code Chapters 504 (Type A) and 505 (Type B)</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Common Uses</div>
+          <div class="detail-text">Land acquisition, building construction, infrastructure, workforce training, small business loan programs (Type B)</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Watch For</div>
+          <div class="detail-text">EDC budgets and contracts may not surface in regular council meetings. Residents should request annual EDC financial reports directly.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter 380 -->
+    <div class="card" data-type="direct">
+      <div class="card-tool">
+        <div>
+          <div class="tool-name">Chapter 380 Agreement</div>
+          <span class="tool-tag tag-direct">Direct Incentive</span>
+        </div>
+      </div>
+      <div class="card-what">
+        <div class="cell-label">What It Does</div>
+        <div class="cell-text">City grants, loans, or tax rebates directly to a business or developer in exchange for investment commitments — jobs, capital, timeline.</div>
+      </div>
+      <div class="card-tradeoff">
+        <div class="cell-label">Key Tradeoff</div>
+        <div class="cell-text">Defers general fund revenue — sometimes for a decade or more — while services to the site still run at full cost.</div>
+      </div>
+      <div class="card-detail">
+        <div class="detail-block">
+          <div class="detail-label">Legal Authority</div>
+          <div class="detail-text">Texas Local Government Code Chapter 380</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Common Uses</div>
+          <div class="detail-text">Retail recruitment, corporate headquarters, medical facilities, mixed-use development. Often structured as a percentage rebate of new tax revenue generated.</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Watch For</div>
+          <div class="detail-text">Ask for the <strong>net revenue figure</strong>, not just projected investment. And always ask: would this project have come without the incentive?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIRZ -->
+    <div class="card" data-type="zone">
+      <div class="card-tool">
+        <div>
+          <div class="tool-name">TIRZ</div>
+          <span class="tool-tag tag-zone">Zone-Based</span>
+        </div>
+      </div>
+      <div class="card-what">
+        <div class="cell-label">What It Does</div>
+        <div class="cell-text">Freezes a zone's tax base at current value. Future increases — the "increment" — fund public improvements inside the zone rather than flowing to the general fund.</div>
+      </div>
+      <div class="card-tradeoff">
+        <div class="cell-label">Key Tradeoff</div>
+        <div class="cell-text">Can run for decades. Schools and counties don't see the increment during that time. In 2023, Texas TIRZs carried $21B in debt.</div>
+      </div>
+      <div class="card-detail">
+        <div class="detail-block">
+          <div class="detail-label">Legal Authority</div>
+          <div class="detail-text">Texas Tax Code Chapter 311</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Eligible Expenditures</div>
+          <div class="detail-text">Roads, drainage, utilities, demolition, facade programs, affordable housing, transit facilities, public buildings</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Watch For</div>
+          <div class="detail-text">TIRZs require annual reporting to the Texas Comptroller. These reports are public. Check fund balance, debt outstanding, and whether increment projections are being met.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chapter 312 -->
+    <div class="card" data-type="abate">
+      <div class="card-tool">
+        <div>
+          <div class="tool-name">Chapter 312 Abatement</div>
+          <span class="tool-tag tag-abate">Abatement</span>
+        </div>
+      </div>
+      <div class="card-what">
+        <div class="cell-label">What It Does</div>
+        <div class="cell-text">Reduces or eliminates city property taxes on improvements — buildings and equipment — for up to 10 years. Requires minimum investment and job creation commitments.</div>
+      </div>
+      <div class="card-tradeoff">
+        <div class="cell-label">Key Tradeoff</div>
+        <div class="cell-text">City gives back only its slice. The school district — often the largest share of a tax bill — still collects at full rate and bears the full service load.</div>
+      </div>
+      <div class="card-detail">
+        <div class="detail-block">
+          <div class="detail-label">Legal Authority</div>
+          <div class="detail-text">Texas Tax Code Chapter 312</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Common Uses</div>
+          <div class="detail-text">Manufacturing facilities, distribution centers, data centers, large capital-intensive employers. Must be approved by council after public hearing.</div>
+        </div>
+        <div class="detail-block">
+          <div class="detail-label">Watch For</div>
+          <div class="detail-text">Abatements apply to <strong>improvements only</strong>, not land value. Always ask what happens if the company leaves before the 10-year term ends — clawback provisions vary widely.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="foot-note">
+    <div class="foot-icon"><span>?</span></div>
+    <div class="foot-text">The hardest question in any incentive deal: <em>Would they have come without us?</em> Cities rarely have a clean answer — but they should always have asked it.</div>
+  </div>
+
+</div>
+
+<script>
+  // Filter
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.card').forEach(card => {
+        if (filter === 'all' || card.dataset.type === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+          card.classList.remove('expanded');
+        }
+      });
+    });
+  });
+
+  // Expand
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => {
+      const wasExpanded = card.classList.contains('expanded');
+      document.querySelectorAll('.card').forEach(c => c.classList.remove('expanded'));
+      if (!wasExpanded) card.classList.add('expanded');
+    });
+  });
+</script>
+</body>
+</html>
