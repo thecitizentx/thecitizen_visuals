@@ -31,15 +31,15 @@ This repo hosts standalone, interactive HTML visuals that accompany our Substack
 
 ## Value per Acre Calculator
 
-[**Open the calculator →**](https://thecitizentx.github.io/value-per-acre/)
+[**Open the calculator →**](https://visuals.thecitizentx.com/value-per-acre/)
 
 Compare value per taxable acre with value per gross development acre using two editable scenarios. Includes a formula panel, acreage validation, percentage reductions, reset controls, and copyable summaries.
 
 **Results are only comparable when the acreage boundary is defined consistently.** Count each acre once; additional roads, drainage, common areas, and easements must exclude land already counted in taxable parcels or another category.
 
-[![Try the Value per Acre Calculator](https://thecitizentx.github.io/value-per-acre/assets/value-per-acre-cta.png)](https://thecitizentx.github.io/value-per-acre/)
+[![Try the Value per Acre Calculator](https://visuals.thecitizentx.com/value-per-acre/assets/value-per-acre-cta.png)](https://visuals.thecitizentx.com/value-per-acre/)
 
-[Calculator source and instructions](https://github.com/thecitizentx/value-per-acre#readme) · [Banner image](https://thecitizentx.github.io/value-per-acre/assets/value-per-acre-cta.png)
+[Calculator source and instructions](./value-per-acre/README.md) · [Banner image](https://visuals.thecitizentx.com/value-per-acre/assets/value-per-acre-cta.png)
 
 ## How to Use
 
