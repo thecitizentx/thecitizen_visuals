@@ -24,9 +24,22 @@ This repo hosts standalone, interactive HTML visuals that accompany our Substack
 | [`econ-dev-toolbox.html`](./econ-dev-toolbox.html) | The Economic Development Toolbox | — |
 | [`entrepreneurial-conditions.html`](./entrepreneurial-conditions.html) | Entrepreneurial Conditions | — |
 | [`tax-base-interactive.html`](./tax-base-interactive.html) | Tax Base Impact Over Time Interactive | How shifting land use percentages compound into dramatically different fiscal outcomes over 15 years of incremental rezoning. |
+| [`value-per-acre.html`](./value-per-acre.html) | Value per Acre — The Cost of Place | Compare value per taxable acre with value per gross development acre, using two scenarios and consistently defined acreage boundaries. |
 | [`zoning-compounding-interactive.html`](./zoning-compounding-interactive.html) | How Zoning Decisions Compound Over Time | Interactive visuals showing how incremental rezoning decisions transform communities over time. Land use diagrams and tax base impact data. |
 | [`zoning-compounding-visuals.html`](./zoning-compounding-visuals.html) | How Zoning Decisions Compound Over Time | Interactive visuals showing how incremental rezoning decisions transform communities over time. Land use diagrams and tax base impact data. |
 <!-- VISUAL-INDEX-END -->
+
+## Value per Acre Calculator
+
+[**Open the calculator →**](https://thecitizentx.github.io/value-per-acre/)
+
+Compare value per taxable acre with value per gross development acre using two editable scenarios. Includes a formula panel, acreage validation, percentage reductions, reset controls, and copyable summaries.
+
+**Results are only comparable when the acreage boundary is defined consistently.** Count each acre once; additional roads, drainage, common areas, and easements must exclude land already counted in taxable parcels or another category.
+
+[![Try the Value per Acre Calculator](https://thecitizentx.github.io/value-per-acre/assets/value-per-acre-cta.png)](https://thecitizentx.github.io/value-per-acre/)
+
+[Calculator source and instructions](https://github.com/thecitizentx/value-per-acre#readme) · [Banner image](https://thecitizentx.github.io/value-per-acre/assets/value-per-acre-cta.png)
 
 ## How to Use
 
